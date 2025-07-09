@@ -1,0 +1,42 @@
+# .NET Core
+bin/
+obj/
+
+# User-specific files
+*.[Cc]ache
+*.db
+*.user
+*.userosscache
+*.suo
+*.userprefs
+
+# Windows Installer files
+*.cab
+*.msi
+*.msm
+*.msp
+
+# Node.js
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Local History
+.localhistory
+
+# VS Code settings
+.vscode/
+
+# JetBrains Rider settings
+.idea/
+
+# ASP.NET Scaffolding
+ScaffoldingReadMe.txt
+
+# Generada por Visual Studio
+.vs/
+
+# Contiene archivos intermedios de compilación
+.obj/
