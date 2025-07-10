@@ -1,13 +1,42 @@
+using Microsoft.EntityFrameworkCore;
 using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateSlimBuilder(args);
+
+// SQLLite
+var connectionString = builder.Configuration.GetConnectionString("DefaultConnection");
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(connectionString));
+
+// Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
+builder.Services.AddControllers();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
 {
     options.SerializerOptions.TypeInfoResolverChain.Insert(0, AppJsonSerializerContext.Default);
 });
 
+builder.Services.Configure<RouteOptions>(options =>
+{
+    options.SetParameterPolicy<Microsoft.AspNetCore.Routing.Constraints.RegexInlineRouteConstraint>("regex");
+});
+
 var app = builder.Build();
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseDeveloperExceptionPage();
+
+    app.UseSwagger();
+    app.UseSwaggerUI(c =>
+    {
+        c.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
+        c.RoutePrefix = "swagger";
+    });
+}
 
 var sampleTodos = new Todo[] {
     new(1, "Walk the dog"),
@@ -24,8 +53,10 @@ todosApi.MapGet("/{id}", (int id) =>
         ? Results.Ok(todo)
         : Results.NotFound());
 
-app.Run();
+app.UseHttpsRedirection();
+app.MapControllers();
 
+app.Run();
 public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
 
 [JsonSerializable(typeof(Todo[]))]
