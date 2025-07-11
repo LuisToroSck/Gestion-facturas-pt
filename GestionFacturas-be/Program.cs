@@ -12,6 +12,9 @@ builder.Services.AddDbContext<AppDbContext>(options =>
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+// Invoice Service para cargar JSON
+builder.Services.AddScoped<InvoiceService>();
+
 builder.Services.AddControllers();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -55,6 +58,12 @@ todosApi.MapGet("/{id}", (int id) =>
 
 app.UseHttpsRedirection();
 app.MapControllers();
+
+using (var scope = app.Services.CreateScope())
+{
+    var invoiceService = scope.ServiceProvider.GetRequiredService<InvoiceService>();
+    invoiceService.LoadInvoicesFromJson("bd_exam.json");
+}
 
 app.Run();
 public record Todo(int Id, string? Title, DateOnly? DueBy = null, bool IsComplete = false);
