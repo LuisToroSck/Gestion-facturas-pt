@@ -37,6 +37,19 @@ public class InvoiceService
 
             foreach (var invoice in invoiceContainer.invoices)
             {
+
+                // Incoherencia entre subtotales de productos y "total_amount"
+                if (MontoTotal(invoice) != invoice.TotalAmount)
+                {
+                    invoice.InvoiceStatus = "Inconsistent";
+                }
+
+                // Calcular estado de la factura
+                invoice.InvoiceStatus = CalcularEstadoFactura(invoice);
+
+                // Calcular estado de pago de la factura
+                invoice.PaymentStatus = CalcularEstadoPagoFactura(invoice);
+
                 _context.Invoices.Add(invoice);
             }
 
@@ -48,6 +61,59 @@ public class InvoiceService
         }
     }
 
+    public decimal MontoTotal(Invoice invoice)
+    {
+        decimal total = invoice.InvoiceDetail.Sum(d => d.Subtotal);
+        return total;
+    }
 
+    public string CalcularEstadoFactura(Invoice invoice)
+    {
+        string estado_factura = "Issued";
 
+        if (invoice.InvoiceCreditNote != null && invoice.InvoiceCreditNote.Any())
+        {
+            decimal? suma_montos_nc = invoice.InvoiceCreditNote.Sum(cna => cna.CreditNoteAmount);
+
+            if (suma_montos_nc != null)
+            {
+                if (suma_montos_nc == invoice.TotalAmount)
+                {
+                    estado_factura = "Cancelled";
+                }
+
+                else if (suma_montos_nc < invoice.TotalAmount)
+                {
+                    estado_factura = "Partial";
+                }
+            }
+        }
+
+        return estado_factura;
+    }
+
+    public string CalcularEstadoPagoFactura(Invoice invoice)
+    {
+        string estado_pago_factura = string.Empty;
+
+        if (invoice.InvoicePayment != null)
+        {
+            if (invoice.InvoicePayment.PaymentDate.HasValue)
+            {
+                estado_pago_factura = "Paid";
+            } else if (DateTime.Now > invoice.PaymentDueDate)
+            {
+                estado_pago_factura = "Overdue";
+            } else
+            {
+                estado_pago_factura = "Pending";
+            }
+        } else
+        {
+            estado_pago_factura = "Pending";
+        }
+
+        return estado_pago_factura;
+
+    }
 }
