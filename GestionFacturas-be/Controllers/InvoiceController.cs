@@ -68,4 +68,18 @@ public class InvoiceController : ControllerBase
         }
     }
 
+    [HttpGet("overdue-count")]
+    public async Task<ActionResult<decimal>> GetCantidadVencidas()
+    {
+        try
+        {
+            decimal cantidad_vencidas = await _invoiceService.CantidadVencidas();
+            return Ok(cantidad_vencidas);
+        }
+        catch (Exception ex)
+        {
+            return StatusCode(500, $"Error interno: {ex.Message}");
+        }
+    }
+
 }
