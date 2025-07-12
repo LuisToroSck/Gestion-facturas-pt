@@ -82,4 +82,12 @@ public class InvoiceController : ControllerBase
         }
     }
 
+    [HttpGet("by-due-range")]
+    public async Task<ActionResult<Dictionary<string, int>>> GetPorRango()
+    {
+        var resultado = await _invoiceService.GetFacturasAgrupadasPorRango();
+        return Ok(resultado);
+    }
+
+
 }
