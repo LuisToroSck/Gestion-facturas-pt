@@ -4,7 +4,7 @@ import { formatDate, formatAmount } from '../utils/utils';
 import InvoiceDetail from './invoiceDetail';
 import CreditNoteModal from './creditNoteModal';
 
-function OverdueInvoices({ invoices, onSuccess }) {
+function OverdueInvoices({ invoices, onSuccess, updateMontoPendiente }) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
@@ -82,6 +82,7 @@ function OverdueInvoices({ invoices, onSuccess }) {
                 onHide={() => setShowModalCreditNote(false)}
                 invoice={selectedInvoice}
                 onSuccess={onSuccess}
+                updateMontoPendiente={updateMontoPendiente}
             />
         </>
     );

@@ -3,7 +3,7 @@ import { Modal, Button, Form, Alert } from 'react-bootstrap';
 import api from '../services/api';
 import { toast } from 'react-toastify';
 
-function CreditNoteModal({ show, onHide, invoice, onSuccess }) {
+function CreditNoteModal({ show, onHide, invoice, onSuccess, updateMontoPendiente }) {
     if (!invoice) return null;
 
     const [error, setError] = useState('');
@@ -24,6 +24,7 @@ function CreditNoteModal({ show, onHide, invoice, onSuccess }) {
                 toast.success('Credit note added successfully');
                 onHide();
                 onSuccess();
+                updateMontoPendiente();
             })
             .catch((error) => {
                 toast.error('Error adding credit note');

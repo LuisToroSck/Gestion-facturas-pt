@@ -141,12 +141,21 @@ public class InvoiceService
     public async Task<decimal> CalcularMontoPendiente()
     {
         var facturasPendientes = await _context.Invoices
+            .Include(i => i.InvoiceCreditNote)
             .Where(i =>
                 i.InvoiceStatus != "Inconsistent" &&
                 (i.PaymentStatus == "Pending" || i.PaymentStatus == "Overdue"))
             .ToListAsync();
 
-        decimal total = facturasPendientes.Sum(i => i.TotalAmount);
+        decimal total = 0;
+
+        foreach (var factura in facturasPendientes)
+        {
+            var notasCredito = factura.InvoiceCreditNote?.Sum(n => n.CreditNoteAmount ?? 0) ?? 0;
+            var neto = factura.TotalAmount - notasCredito;
+            total += neto;
+        }
+
         return total;
     }
 

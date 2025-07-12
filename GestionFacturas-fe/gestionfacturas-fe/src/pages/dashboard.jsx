@@ -150,7 +150,8 @@ function Dashboard() {
                         <h4>Overdue invoices without credit note</h4>
                         <OverdueInvoicesTable 
                         invoices={overdueInvoicesSinNC} 
-                        onSuccess={getOverdueInvoicesSinNC}/>
+                        onSuccess={getOverdueInvoicesSinNC}
+                        updateMontoPendiente={getMontoPendiente}/>
                     </Col>
                 </Row>
 
