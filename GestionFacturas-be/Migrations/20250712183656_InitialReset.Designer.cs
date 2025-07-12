@@ -10,14 +10,48 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GestionFacturas_be.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250711011023_jsonpropertyname2")]
-    partial class jsonpropertyname2
+    [Migration("20250712183656_InitialReset")]
+    partial class InitialReset
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.4");
+
+            modelBuilder.Entity("GestionFacturas_be.Models.InvoiceBusquedaDto", b =>
+                {
+                    b.Property<string>("CustomerName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<DateTime>("InvoiceDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<int>("InvoiceNumber")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("InvoiceStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("PaymentDueDate")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("PaymentStatus")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<decimal>("TotalAmount")
+                        .HasColumnType("TEXT");
+
+                    b.ToTable((string)null);
+
+                    b.ToView("vw_factura_busqueda", (string)null);
+                });
 
             modelBuilder.Entity("Invoice", b =>
                 {
@@ -58,77 +92,6 @@ namespace GestionFacturas_be.Migrations
 
             modelBuilder.Entity("Invoice", b =>
                 {
-                    b.OwnsMany("InvoiceCreditNote", "InvoiceCreditNote", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<decimal?>("CreditNoteAmount")
-                                .HasColumnType("TEXT")
-                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_amount");
-
-                            b1.Property<DateTime?>("CreditNoteDate")
-                                .HasColumnType("TEXT")
-                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_date");
-
-                            b1.Property<int?>("CreditNoteNumber")
-                                .HasColumnType("INTEGER")
-                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_number");
-
-                            b1.Property<int>("InvoiceId")
-                                .HasColumnType("INTEGER");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("InvoiceId");
-
-                            b1.ToTable("InvoiceCreditNote");
-
-                            b1.HasAnnotation("Relational:JsonPropertyName", "invoice_credit_note");
-
-                            b1.WithOwner()
-                                .HasForeignKey("InvoiceId");
-                        });
-
-                    b.OwnsMany("InvoiceDetail", "InvoiceDetail", b1 =>
-                        {
-                            b1.Property<int>("Id")
-                                .ValueGeneratedOnAdd()
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<int>("InvoiceId")
-                                .HasColumnType("INTEGER");
-
-                            b1.Property<string>("ProductName")
-                                .IsRequired()
-                                .HasColumnType("TEXT")
-                                .HasAnnotation("Relational:JsonPropertyName", "product_name");
-
-                            b1.Property<int>("Quantity")
-                                .HasColumnType("INTEGER")
-                                .HasAnnotation("Relational:JsonPropertyName", "quantity");
-
-                            b1.Property<decimal>("Subtotal")
-                                .HasColumnType("TEXT")
-                                .HasAnnotation("Relational:JsonPropertyName", "subtotal");
-
-                            b1.Property<decimal>("UnitPrice")
-                                .HasColumnType("TEXT")
-                                .HasAnnotation("Relational:JsonPropertyName", "unit_price");
-
-                            b1.HasKey("Id");
-
-                            b1.HasIndex("InvoiceId");
-
-                            b1.ToTable("InvoiceDetail");
-
-                            b1.HasAnnotation("Relational:JsonPropertyName", "invoice_detail");
-
-                            b1.WithOwner()
-                                .HasForeignKey("InvoiceId");
-                        });
-
                     b.OwnsOne("Customer", "Customer", b1 =>
                         {
                             b1.Property<int>("InvoiceNumber")
@@ -151,6 +114,77 @@ namespace GestionFacturas_be.Migrations
                             b1.ToTable("Invoices");
 
                             b1.HasAnnotation("Relational:JsonPropertyName", "customer");
+
+                            b1.WithOwner()
+                                .HasForeignKey("InvoiceNumber");
+                        });
+
+                    b.OwnsMany("InvoiceCreditNote", "InvoiceCreditNote", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<decimal?>("CreditNoteAmount")
+                                .HasColumnType("TEXT")
+                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_amount");
+
+                            b1.Property<DateTime?>("CreditNoteDate")
+                                .HasColumnType("TEXT")
+                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_date");
+
+                            b1.Property<int?>("CreditNoteNumber")
+                                .HasColumnType("INTEGER")
+                                .HasAnnotation("Relational:JsonPropertyName", "credit_note_number");
+
+                            b1.Property<int>("InvoiceNumber")
+                                .HasColumnType("INTEGER");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("InvoiceNumber");
+
+                            b1.ToTable("InvoiceCreditNote");
+
+                            b1.HasAnnotation("Relational:JsonPropertyName", "invoice_credit_note");
+
+                            b1.WithOwner()
+                                .HasForeignKey("InvoiceNumber");
+                        });
+
+                    b.OwnsMany("InvoiceDetail", "InvoiceDetail", b1 =>
+                        {
+                            b1.Property<int>("Id")
+                                .ValueGeneratedOnAdd()
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<int>("InvoiceNumber")
+                                .HasColumnType("INTEGER");
+
+                            b1.Property<string>("ProductName")
+                                .IsRequired()
+                                .HasColumnType("TEXT")
+                                .HasAnnotation("Relational:JsonPropertyName", "product_name");
+
+                            b1.Property<int>("Quantity")
+                                .HasColumnType("INTEGER")
+                                .HasAnnotation("Relational:JsonPropertyName", "quantity");
+
+                            b1.Property<decimal>("Subtotal")
+                                .HasColumnType("TEXT")
+                                .HasAnnotation("Relational:JsonPropertyName", "subtotal");
+
+                            b1.Property<decimal>("UnitPrice")
+                                .HasColumnType("TEXT")
+                                .HasAnnotation("Relational:JsonPropertyName", "unit_price");
+
+                            b1.HasKey("Id");
+
+                            b1.HasIndex("InvoiceNumber");
+
+                            b1.ToTable("InvoiceDetail");
+
+                            b1.HasAnnotation("Relational:JsonPropertyName", "invoice_detail");
 
                             b1.WithOwner()
                                 .HasForeignKey("InvoiceNumber");

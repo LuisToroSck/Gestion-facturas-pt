@@ -32,6 +32,7 @@ public class Invoice
 
 public class InvoiceDetail
 {
+    public int InvoiceNumber { get; set; }
     [JsonPropertyName("product_name")]
     public string ProductName { get; set; }
     [JsonPropertyName("unit_price")]
@@ -52,6 +53,7 @@ public class InvoicePayment
 
 public class InvoiceCreditNote
 {
+    public int InvoiceNumber { get; set; }
     [JsonPropertyName("credit_note_number")]
     public int? CreditNoteNumber { get; set; }
     [JsonPropertyName("credit_note_date")]

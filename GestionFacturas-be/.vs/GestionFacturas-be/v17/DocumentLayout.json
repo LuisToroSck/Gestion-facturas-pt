@@ -3,24 +3,24 @@
   "WorkspaceRootPath": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:appdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\models\\invoicebusquedadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:models\\invoicebusquedadto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:models\\invoice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:controllers\\invoicecontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:services\\invoiceservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\models\\createcreditnotedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:models\\createcreditnotedto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|c:\\users\\javie\\onedrive\\escritorio\\peguitas\\apex group\\gestionfacturas-be\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{F3607335-6EFF-46F6-90C7-2C54810A6BA2}|GestionFacturas-be.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -30,72 +30,71 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 4,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "InvoiceController.cs",
-              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Controllers\\InvoiceController.cs",
-              "RelativeDocumentMoniker": "Controllers\\InvoiceController.cs",
-              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Controllers\\InvoiceController.cs",
-              "RelativeToolTip": "Controllers\\InvoiceController.cs",
-              "ViewState": "AgIAAIQAAAAAAAAAAAAqwJoAAAA8AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-11T04:44:11.353Z",
-              "IsPinned": true,
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
               "DocumentIndex": 3,
-              "Title": "InvoiceBusquedaDto.cs",
-              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\InvoiceBusquedaDto.cs",
-              "RelativeDocumentMoniker": "Models\\InvoiceBusquedaDto.cs",
-              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\InvoiceBusquedaDto.cs",
-              "RelativeToolTip": "Models\\InvoiceBusquedaDto.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAoAAAAwAAAAAAAAAA==",
+              "Title": "CreateCreditNoteDto.cs",
+              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\CreateCreditNoteDto.cs",
+              "RelativeDocumentMoniker": "Models\\CreateCreditNoteDto.cs",
+              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\CreateCreditNoteDto.cs",
+              "RelativeToolTip": "Models\\CreateCreditNoteDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T15:16:27.667Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "AppDbContext.cs",
-              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\AppDbContext.cs",
-              "RelativeDocumentMoniker": "AppDbContext.cs",
-              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\AppDbContext.cs",
-              "RelativeToolTip": "AppDbContext.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwCkAAAABAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T15:15:09.838Z",
+              "WhenOpened": "2025-07-12T18:22:10.433Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Invoice.cs",
+              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\Invoice.cs",
+              "RelativeDocumentMoniker": "Models\\Invoice.cs",
+              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Models\\Invoice.cs",
+              "RelativeToolTip": "Models\\Invoice.cs",
+              "ViewState": "AgIAACkAAAAAAAAAAAAjwDcAAAAqAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T18:20:47.706Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
               "Title": "Program.cs",
               "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Program.cs",
               "RelativeDocumentMoniker": "Program.cs",
               "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Program.cs",
               "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAEgAAAAAAAAAAAAgwFAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAEoAAAAAAAAAAAAAAGAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T15:12:58.312Z",
+              "WhenOpened": "2025-07-12T18:19:46.08Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "AppDbContext.cs",
+              "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\AppDbContext.cs",
+              "RelativeDocumentMoniker": "AppDbContext.cs",
+              "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\AppDbContext.cs",
+              "RelativeToolTip": "AppDbContext.cs",
+              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBoAAAAjAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-07-12T18:19:39.691Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "InvoiceService.cs",
               "DocumentMoniker": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Services\\InvoiceService.cs",
               "RelativeDocumentMoniker": "Services\\InvoiceService.cs",
               "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\Services\\InvoiceService.cs",
               "RelativeToolTip": "Services\\InvoiceService.cs",
-              "ViewState": "AgIAACYBAAAAAAAAAAAhwDQBAABDAAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAQwB0AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T13:10:42.234Z",
+              "WhenOpened": "2025-07-12T18:16:09.27Z",
               "EditorCaption": ""
             }
           ]

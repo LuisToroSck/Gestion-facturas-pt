@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace GestionFacturas_be.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class InitialReset : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -22,11 +22,11 @@ namespace GestionFacturas_be.Migrations
                     DaysToDue = table.Column<int>(type: "INTEGER", nullable: false),
                     PaymentDueDate = table.Column<DateTime>(type: "TEXT", nullable: false),
                     PaymentStatus = table.Column<string>(type: "TEXT", nullable: false),
-                    InvoicePayment_PaymentMethod = table.Column<string>(type: "TEXT", nullable: false),
+                    InvoicePayment_PaymentMethod = table.Column<string>(type: "TEXT", nullable: true),
                     InvoicePayment_PaymentDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    Customer_CustomerRun = table.Column<string>(type: "TEXT", nullable: false),
-                    Customer_CustomerName = table.Column<string>(type: "TEXT", nullable: false),
-                    Customer_CustomerEmail = table.Column<string>(type: "TEXT", nullable: false)
+                    Customer_CustomerRun = table.Column<string>(type: "TEXT", nullable: true),
+                    Customer_CustomerName = table.Column<string>(type: "TEXT", nullable: true),
+                    Customer_CustomerEmail = table.Column<string>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -39,17 +39,17 @@ namespace GestionFacturas_be.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
-                    CreditNoteNumber = table.Column<int>(type: "INTEGER", nullable: false),
-                    CreditNoteDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CreditNoteAmount = table.Column<decimal>(type: "TEXT", nullable: false),
-                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false)
+                    InvoiceNumber = table.Column<int>(type: "INTEGER", nullable: false),
+                    CreditNoteNumber = table.Column<int>(type: "INTEGER", nullable: true),
+                    CreditNoteDate = table.Column<DateTime>(type: "TEXT", nullable: true),
+                    CreditNoteAmount = table.Column<decimal>(type: "TEXT", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InvoiceCreditNote", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceCreditNote_Invoices_InvoiceId",
-                        column: x => x.InvoiceId,
+                        name: "FK_InvoiceCreditNote_Invoices_InvoiceNumber",
+                        column: x => x.InvoiceNumber,
                         principalTable: "Invoices",
                         principalColumn: "InvoiceNumber",
                         onDelete: ReferentialAction.Cascade);
@@ -61,32 +61,32 @@ namespace GestionFacturas_be.Migrations
                 {
                     Id = table.Column<int>(type: "INTEGER", nullable: false)
                         .Annotation("Sqlite:Autoincrement", true),
+                    InvoiceNumber = table.Column<int>(type: "INTEGER", nullable: false),
                     ProductName = table.Column<string>(type: "TEXT", nullable: false),
                     UnitPrice = table.Column<decimal>(type: "TEXT", nullable: false),
                     Quantity = table.Column<int>(type: "INTEGER", nullable: false),
-                    Subtotal = table.Column<decimal>(type: "TEXT", nullable: false),
-                    InvoiceId = table.Column<int>(type: "INTEGER", nullable: false)
+                    Subtotal = table.Column<decimal>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_InvoiceDetail", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_InvoiceDetail_Invoices_InvoiceId",
-                        column: x => x.InvoiceId,
+                        name: "FK_InvoiceDetail_Invoices_InvoiceNumber",
+                        column: x => x.InvoiceNumber,
                         principalTable: "Invoices",
                         principalColumn: "InvoiceNumber",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceCreditNote_InvoiceId",
+                name: "IX_InvoiceCreditNote_InvoiceNumber",
                 table: "InvoiceCreditNote",
-                column: "InvoiceId");
+                column: "InvoiceNumber");
 
             migrationBuilder.CreateIndex(
-                name: "IX_InvoiceDetail_InvoiceId",
+                name: "IX_InvoiceDetail_InvoiceNumber",
                 table: "InvoiceDetail",
-                column: "InvoiceId");
+                column: "InvoiceNumber");
         }
 
         /// <inheritdoc />
