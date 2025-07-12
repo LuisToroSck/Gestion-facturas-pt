@@ -9,7 +9,7 @@ function BarChart({ labels, dataValues }) {
         labels: labels,
         datasets: [
             {
-                label: 'Facturas vencidas',
+                label: 'Number of Invoices',
                 data: dataValues,
                 backgroundColor: '#c9ced6ff',
             },
