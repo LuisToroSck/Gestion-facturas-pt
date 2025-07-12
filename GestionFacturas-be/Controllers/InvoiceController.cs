@@ -114,7 +114,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("consistent-invoices")]
     public async Task<ActionResult<List<Invoice>>> GetFacturasConsistentesVencidas()
     {
-        var facturas = await _invoiceService.ObtenerFacturasCriticas();
+        var facturas = await _invoiceService.ObtenerFacturasConsistentes();
 
         if (facturas == null || !facturas.Any())
             return NotFound("No se encontraron facturas que cumplan los criterios.");

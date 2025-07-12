@@ -183,7 +183,7 @@ public class InvoiceService
         return agrupadas;
     }
 
-    public async Task<List<Invoice>> ObtenerFacturasVencidasSinNotaAsync()
+    public async Task<List<Invoice>> ObtenerFacturasVencidasSinNota()
     {
         var facturas = await _context.Invoices
             .Where(i =>
@@ -196,7 +196,7 @@ public class InvoiceService
         return facturas;
     }
 
-    public async Task<InvoiceCreditNote?> AgregarNotaDeCreditoAsync(CreateCreditNoteDto dto)
+    public async Task<InvoiceCreditNote?> AgregarNotaDeCredito(CreateCreditNoteDto dto)
     {
         var factura = await _context.Invoices
             .Include(i => i.InvoiceCreditNote)
@@ -231,4 +231,22 @@ public class InvoiceService
             .Max(n => n.CreditNoteNumber.Value) + 1;
     }
 
+    public async Task<List<Invoice>> ObtenerFacturasConsistentes()
+    {
+        var hoy = DateTime.UtcNow;
+
+        var facturas = await _context.Invoices
+            .Include(i => i.InvoiceCreditNote)
+            .Include(i => i.InvoicePayment)
+            .Include(i => i.Customer)
+            .Include(i => i.InvoiceDetail)
+            .Where(i =>
+                i.PaymentDueDate < hoy.AddDays(-30) &&
+                (i.InvoiceCreditNote == null || i.InvoiceCreditNote.Count == 0) &&
+                i.InvoicePayment == null
+            )
+            .ToListAsync();
+
+        return facturas;
+    }
 }
