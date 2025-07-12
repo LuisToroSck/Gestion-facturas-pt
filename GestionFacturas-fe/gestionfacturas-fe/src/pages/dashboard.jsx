@@ -21,7 +21,6 @@ function Dashboard() {
         api.get('/invoices')
             .then((response) => {
                 setInvoices(response.data);
-                console.log('Facturas cargadas:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar las facturas:', error);
@@ -45,7 +44,6 @@ function Dashboard() {
         api.get('/invoices/pending-amount')
             .then((response) => {
                 setMontoPendiente(response.data);
-                console.log('Monto pendiente:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar el monto pendiente:', error);
@@ -76,7 +74,6 @@ function Dashboard() {
         api.get('/invoices/overdue-no-credit')
             .then((response) => {
                 setOverdueInvoicesSinNC(response.data);
-                console.log('Facturas vencidas sin nota de crédito:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar las facturas vencidas sin nota de crédito:', error);

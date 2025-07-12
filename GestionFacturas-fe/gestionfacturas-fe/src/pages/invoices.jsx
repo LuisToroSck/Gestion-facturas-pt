@@ -14,7 +14,6 @@ function Invoices() {
 		api.get('/invoices')
 			.then((response) => {
 				setInvoices(response.data);
-				console.log('Facturas cargadas:', response.data);
 			})
 			.catch((error) => {
 				console.error('Error al cargar las facturas:', error);

@@ -14,7 +14,6 @@ function ConsistentInvoices() {
         api.get('/invoices/consistent-invoices')
             .then((response) => {
                 setConsistentInvoices(response.data);
-                console.log('Consistent Invoices:', response.data);
             })
             .catch((error) => {
                 console.error("Error fetching consistent invoices:", error);

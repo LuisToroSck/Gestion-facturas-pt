@@ -12,7 +12,6 @@ function InconsistentInvoices() {
         api.get('/invoices/inconsistent-invoices')
             .then((response) => {
                 setInconsistentInvoices(response.data);
-                console.log('Inconsistent Invoices:', response.data);
             })
             .catch((error) => {
                 console.error("Error fetching inconsistent invoices:", error);
