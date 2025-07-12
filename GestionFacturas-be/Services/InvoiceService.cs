@@ -2,6 +2,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using GestionFacturas_be.Models;
 public class InvoiceService
 {
     private readonly AppDbContext _context;
@@ -186,5 +187,39 @@ public class InvoiceService
         return facturas;
     }
 
+    public async Task<InvoiceCreditNote?> AgregarNotaDeCreditoAsync(CreateCreditNoteDto dto)
+    {
+        var factura = await _context.Invoices
+            .Include(i => i.InvoiceCreditNote)
+            .FirstOrDefaultAsync(i => i.InvoiceNumber == dto.InvoiceNumber);
+
+        if (factura == null)
+            return null;
+
+        var cn_number = GenerarNumeroDeNota(factura.InvoiceCreditNote);
+
+        var nuevaNota = new InvoiceCreditNote
+        {
+            CreditNoteNumber = cn_number,
+            CreditNoteDate = DateTime.UtcNow,
+            CreditNoteAmount = dto.CreditNoteAmount
+        };
+
+        factura.InvoiceCreditNote ??= new List<InvoiceCreditNote>();
+        factura.InvoiceCreditNote.Add(nuevaNota);
+
+        await _context.SaveChangesAsync();
+        return nuevaNota;
+    }
+
+    private int GenerarNumeroDeNota(List<InvoiceCreditNote>? creditNotes)
+    {
+        if (creditNotes == null || !creditNotes.Any())
+            return 1;
+
+        return creditNotes
+            .Where(n => n.CreditNoteNumber.HasValue)
+            .Max(n => n.CreditNoteNumber.Value) + 1;
+    }
 
 }
