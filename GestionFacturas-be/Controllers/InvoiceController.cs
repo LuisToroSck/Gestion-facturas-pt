@@ -89,5 +89,15 @@ public class InvoiceController : ControllerBase
         return Ok(resultado);
     }
 
+    [HttpGet("overdue-no-credit")]
+    public async Task<ActionResult<List<Invoice>>> GetVencidasSinNota()
+    {
+        var facturas = await _invoiceService.ObtenerFacturasVencidasSinNotaAsync();
+
+        if (facturas == null || !facturas.Any())
+            return NotFound("No hay facturas vencidas sin nota de crédito.");
+
+        return Ok(facturas);
+    }
 
 }
