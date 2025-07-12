@@ -15,6 +15,17 @@ builder.Services.AddSwaggerGen();
 // Invoice Service para cargar JSON
 builder.Services.AddScoped<InvoiceService>();
 
+// Habilitar CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowReactApp", policy =>
+    {
+        policy.WithOrigins("http://localhost:5173")
+            .AllowAnyHeader()
+            .AllowAnyMethod();
+    });
+});
+
 builder.Services.AddControllers();
 
 builder.Services.ConfigureHttpJsonOptions(options =>
@@ -28,6 +39,8 @@ builder.Services.Configure<RouteOptions>(options =>
 });
 
 var app = builder.Build();
+
+app.UseCors("AllowReactApp");
 
 if (app.Environment.IsDevelopment())
 {
