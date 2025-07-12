@@ -14,6 +14,9 @@ public class AppDbContext : DbContext
         base.OnModelCreating(modelBuilder);
 
         modelBuilder.Entity<Invoice>()
+            .HasKey(i => i.InvoiceNumber);
+
+        modelBuilder.Entity<Invoice>()
             .OwnsMany(i => i.InvoiceDetail, b =>
             {
                 b.WithOwner().HasForeignKey("InvoiceNumber");
