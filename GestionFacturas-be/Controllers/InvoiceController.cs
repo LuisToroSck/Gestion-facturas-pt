@@ -133,4 +133,15 @@ public class InvoiceController : ControllerBase
         return Ok(resumen);
     }
 
+    [HttpGet("inconsistent-invoices")]
+    public async Task<ActionResult<List<FacturaInconsistenteDto>>> GetFacturasInconsistentes()
+    {
+        var facturas = await _invoiceService.ObtenerFacturasInconsistentes();
+
+        if (facturas == null || !facturas.Any())
+            return NotFound("No se encontraron facturas inconsistentes.");
+
+        return Ok(facturas);
+    }
+
 }
