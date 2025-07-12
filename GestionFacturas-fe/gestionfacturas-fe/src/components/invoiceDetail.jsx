@@ -1,7 +1,7 @@
 import { Modal, Card, Row, Col, Table, Badge, Button } from 'react-bootstrap';
 import { formatDate, formatAmount } from '../utils/utils';
 
-function InvoiceDetail({ show, onHide, invoice }) {
+function InvoiceDetail({ show, onHide, invoice, onSuccess }) {
     if (!invoice) return null;
 
     return (
@@ -112,8 +112,6 @@ function InvoiceDetail({ show, onHide, invoice }) {
                             </Table>
                         </>
                     )}
-
-
                 </Modal.Body>
             </Modal>
         </>

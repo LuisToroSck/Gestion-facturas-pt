@@ -2,8 +2,9 @@ import { useState } from 'react';
 import { Table, Badge, Pagination } from 'react-bootstrap';
 import { formatDate, formatAmount } from '../utils/utils';
 import InvoiceDetail from './invoiceDetail';
+import CreditNoteModal from './creditNoteModal';
 
-function OverdueInvoices({ invoices }) {
+function OverdueInvoices({ invoices, onSuccess }) {
     const [currentPage, setCurrentPage] = useState(1);
     const itemsPerPage = 10;
 
@@ -27,7 +28,8 @@ function OverdueInvoices({ invoices }) {
     }
 
     const [selectedInvoice, setSelectedInvoice] = useState(null);
-    const [showModal, setShowModal] = useState(false);
+    const [showModalDetail, setShowModalDetail] = useState(false);
+    const [showModalCreditNote, setShowModalCreditNote] = useState(false);
 
     return (
         <>
@@ -55,9 +57,12 @@ function OverdueInvoices({ invoices }) {
                             <td>
                                 <button className="btn btn-primary btn-sm" onClick={() => {
                                     setSelectedInvoice(invoice);
-                                    setShowModal(true);
+                                    setShowModalDetail(true);
                                 }}>View</button>
-                                <button className="btn btn-success btn-sm ms-2">+ Credit note</button>
+                                <button className="btn btn-success btn-sm ms-2" onClick={() => {
+                                    setSelectedInvoice(invoice);
+                                    setShowModalCreditNote(true);
+                                }}>+ Credit note</button>
                             </td>
                         </tr>
                     ))}
@@ -67,9 +72,16 @@ function OverdueInvoices({ invoices }) {
             <Pagination>{paginationItems}</Pagination>
 
             <InvoiceDetail
-                show={showModal}
-                onHide={() => setShowModal(false)}
+                show={showModalDetail}
+                onHide={() => setShowModalDetail(false)}
                 invoice={selectedInvoice}
+            />
+
+            <CreditNoteModal
+                show={showModalCreditNote}
+                onHide={() => setShowModalCreditNote(false)}
+                invoice={selectedInvoice}
+                onSuccess={onSuccess}
             />
         </>
     );

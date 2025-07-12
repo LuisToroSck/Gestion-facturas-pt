@@ -9,8 +9,7 @@ function Invoices() {
 	const [invoices, setInvoices] = useState([]);
 	const [loading, setLoading] = useState(true);
 
-
-	useEffect(() => {
+	function getInvoices() {
 		api.get('/invoices')
 			.then((response) => {
 				setInvoices(response.data);
@@ -22,9 +21,13 @@ function Invoices() {
 			.finally(() => {
 				setLoading(false);
 			});
+	}
+
+	useEffect(() => {
+		getInvoices();
 	}, []);
 
-    if (loading) return <p>Cargando facturas...</p>;
+	if (loading) return <p>Cargando facturas...</p>;
 
 	return (
 		<>
@@ -32,7 +35,10 @@ function Invoices() {
 				<Row className="mt-5">
 					<Col>
 						<h1>Invoices</h1>
-						<InvoicesTable invoices={invoices} />
+						<InvoicesTable
+							invoices={invoices}
+							onSuccess={getInvoices}
+						/>
 					</Col>
 				</Row>
 			</Container>

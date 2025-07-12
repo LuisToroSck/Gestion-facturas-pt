@@ -148,7 +148,9 @@ function Dashboard() {
                 <Row>
                     <Col>
                         <h4>Overdue invoices without credit note</h4>
-                        <OverdueInvoicesTable invoices={overdueInvoicesSinNC} />
+                        <OverdueInvoicesTable 
+                        invoices={overdueInvoicesSinNC} 
+                        onSuccess={getOverdueInvoicesSinNC}/>
                     </Col>
                 </Row>
 
