@@ -5,12 +5,19 @@ import CardResume from '../components/cardResume';
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import BarChart from '../components/barChart';
 import OverdueInvoicesTable from '../components/overdueInvoicesTable';
+import { formatAmount } from '../utils/utils';
 
 function Dashboard() {
     const [invoices, setInvoices] = useState([]);
     const [loading, setLoading] = useState(true);
 
     const [paidPercentage, setPaidPercentage] = useState(0.0);
+
+    const [montoPendiente, setMontoPendiente] = useState(0.0);
+
+    const [cantidadVencidas, setCantidadVencidas] = useState(0);
+
+    const [cantidadVencidasPorDias, setCantidadVencidasPorDias] = useState({});
 
     function getInvoices() {
         api.get('/invoices')
@@ -29,16 +36,50 @@ function Dashboard() {
         api.get('/invoices/paid-percentage')
             .then((response) => {
                 setPaidPercentage(response.data);
-                console.log('Porcentaje de facturas pagadas:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar el porcentaje de facturas pagadas:', error);
             });
     }
 
+    function getMontoPendiente() {
+        api.get('/invoices/pending-amount')
+            .then((response) => {
+                setMontoPendiente(response.data);
+                console.log('Monto pendiente:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error al cargar el monto pendiente:', error);
+            });
+    }
+
+    function getCantidadVencidas() {
+        api.get('/invoices/overdue-count')
+            .then((response) => {
+                setCantidadVencidas(response.data);
+            })
+            .catch((error) => {
+                console.error('Error al cargar la cantidad de facturas vencidas:', error);
+            });
+    }
+
+    function getCantidadVencidasPorDias() {
+        api.get('/invoices/by-due-range')
+            .then((response) => {
+                setCantidadVencidasPorDias(response.data);
+                console.log('Cantidad de facturas vencidas por días:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error al cargar la cantidad de facturas vencidas por días:', error);
+            });
+    }
+
     useEffect(() => {
         getInvoices();
         getPorcentajePaid();
+        getMontoPendiente();
+        getCantidadVencidas();
+        getCantidadVencidasPorDias();
     }, []);
 
     if (loading) return <p>Cargando facturas...</p>;
@@ -68,10 +109,10 @@ function Dashboard() {
                         <CardResume title="Payment Status" value={`${paidPercentage}% Paid`} />
                     </Col>
                     <Col>
-                        <CardResume title="Monto pendiente" value="$215.000" />
+                        <CardResume title="Monto pendiente" value={`${formatAmount(montoPendiente)}`} />
                     </Col>
                     <Col>
-                        <CardResume title="Facturas vencidas" value="12" />
+                        <CardResume title="Facturas vencidas" value={`${cantidadVencidas}`} />
                     </Col>
                 </Row>
 
@@ -79,13 +120,13 @@ function Dashboard() {
 
                 <Row>
                     <Col>
-                        <h4>Overdue Invoices (30+ Days)</h4>
+                        <h4>Invoice distribution by due range</h4>
                         <Card>
                             <Card.Body>
-                                <Card.Subtitle className="mb-2 text-muted">Overdue Invoices</Card.Subtitle>
+                                <Card.Subtitle className="mb-2 text-muted">Invoice distribution by due range</Card.Subtitle>
                                 <BarChart
-                                    labels={['30-60 Days', '60-90 Days', '90+ Days']}
-                                    dataValues={[15, 23, 12]}
+                                    labels={['0-19 Days', '20-39 Days', '40-59 Days', '60+ Days']}
+                                    dataValues={[cantidadVencidasPorDias['0-19 days'], cantidadVencidasPorDias['20-39 days'], cantidadVencidasPorDias['40-59 days'], cantidadVencidasPorDias['60+ days']]}
                                 />
                             </Card.Body>
                         </Card>
