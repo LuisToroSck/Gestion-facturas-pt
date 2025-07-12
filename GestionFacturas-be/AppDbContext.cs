@@ -16,7 +16,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Invoice>()
             .OwnsMany(i => i.InvoiceDetail, b =>
             {
-                b.WithOwner().HasForeignKey("InvoiceId");
+                b.WithOwner().HasForeignKey("InvoiceNumber");
                 b.Property<int>("Id");
                 b.HasKey("Id");
             });
@@ -24,7 +24,7 @@ public class AppDbContext : DbContext
         modelBuilder.Entity<Invoice>()
             .OwnsMany(i => i.InvoiceCreditNote, b =>
             {
-                b.WithOwner().HasForeignKey("InvoiceId");
+                b.WithOwner().HasForeignKey("InvoiceNumber");
                 b.Property<int>("Id");
                 b.HasKey("Id");
             });
