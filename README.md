@@ -7,8 +7,11 @@ Este patrón fue elegido por su simplicidad, eficacia en arquitecturas de tipo R
 - Backend (.NET)
 1. Clonar repositorio: git clone https://github.com/LuisToroSck/Gestion-facturas-pt.git
 2. Acceder a la carpeta backend: cd "Gestion-facturas-pt\gestionfacturas-be"
-3. Restaurar dependencias: dotnet restore
-4. Ejecutar la API: dotnet run
+3. Eliminar app.db: rm migrations (Max/Linux) o del migrations (WIndows)
+4. Crear nueva migración: dotnet ef migrations add InitialReset
+5. Aplicar migración: dotnet ef database update
+6. Restaurar dependencias: dotnet restore
+7. Ejecutar la API: dotnet run
 
 - Frontend (React + Vite
 1. Acceder a la carpeta frontend: cd "GestionFacturas-fe\gestionfacturas-fe
