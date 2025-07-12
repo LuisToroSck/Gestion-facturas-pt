@@ -42,8 +42,7 @@
               "RelativeToolTip": "Models\\CreateCreditNoteDto.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T18:22:10.433Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T18:22:10.433Z"
             },
             {
               "$type": "Document",
@@ -55,8 +54,7 @@
               "RelativeToolTip": "Models\\Invoice.cs",
               "ViewState": "AgIAACkAAAAAAAAAAAAjwDcAAAAqAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T18:20:47.706Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T18:20:47.706Z"
             },
             {
               "$type": "Document",
@@ -68,8 +66,7 @@
               "RelativeToolTip": "Program.cs",
               "ViewState": "AgIAAEoAAAAAAAAAAAAAAGAAAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T18:19:46.08Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T18:19:46.08Z"
             },
             {
               "$type": "Document",
@@ -79,7 +76,7 @@
               "RelativeDocumentMoniker": "AppDbContext.cs",
               "ToolTip": "C:\\Users\\javie\\OneDrive\\Escritorio\\Peguitas\\Apex Group\\GestionFacturas-be\\AppDbContext.cs",
               "RelativeToolTip": "AppDbContext.cs",
-              "ViewState": "AgIAAAsAAAAAAAAAAAAQwBoAAAAjAAAAAAAAAA==",
+              "ViewState": "AgIAAAwAAAAAAAAAAAAAABoAAAAjAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-07-12T18:19:39.691Z",
               "EditorCaption": ""
@@ -94,8 +91,7 @@
               "RelativeToolTip": "Services\\InvoiceService.cs",
               "ViewState": "AgIAABYAAAAAAAAAAAAQwB0AAABOAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-07-12T18:16:09.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-07-12T18:16:09.27Z"
             }
           ]
         }
