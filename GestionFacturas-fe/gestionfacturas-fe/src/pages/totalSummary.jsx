@@ -27,7 +27,7 @@ function TotalSummary() {
         <>
             <Container fluid>
                 <Row className="mt-5">
-                    <h1>Invoice Payment Status Report</h1>
+                    <h1>Invoice payment status report</h1>
                     <p>Total summary and percentage of invoices by payment status</p>
                     {totalSummary?.map((item, index) => (
                         <Col key={index}>
