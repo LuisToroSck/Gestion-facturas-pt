@@ -23,8 +23,15 @@ function CreditNoteModal({ show, onHide, invoice, onSuccess, updateMontoPendient
                 setCreateCreditNoteDto({ invoiceNumber: invoice.invoiceNumber, creditNoteAmount: 0 });
                 toast.success('Credit note added successfully');
                 onHide();
-                onSuccess();
-                updateMontoPendiente();
+
+                try {
+                    onSuccess();
+                    updateMontoPendiente();
+                } catch (e) {
+                    console.warn('Error post-acción, pero nota ya fue agregada:', e);
+                }
+
+                return;
             })
             .catch((error) => {
                 toast.error('Error adding credit note');
