@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using GestionFacturas_be.Models;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 [ApiController]
@@ -59,7 +60,6 @@ public class InvoiceController : ControllerBase
         try
         {
             decimal monto_pendiente = await _invoiceService.CalcularMontoPendiente();
-            Console.WriteLine(monto_pendiente);
             return Ok(monto_pendiente);
         }
         catch (Exception ex)
@@ -98,6 +98,17 @@ public class InvoiceController : ControllerBase
             return NotFound("No hay facturas vencidas sin nota de crédito.");
 
         return Ok(facturas);
+    }
+
+    [HttpPost("add-credit-note")]
+    public async Task<ActionResult<InvoiceCreditNote>> AddCreditNote([FromBody] CreateCreditNoteDto dto)
+    {
+        var nota = await _invoiceService.AgregarNotaDeCreditoAsync(dto);
+
+        if (nota == null)
+            return BadRequest("No se pudo agregar la nota. Verificá que el número de factura exista.");
+
+        return Ok(nota);
     }
 
 }
