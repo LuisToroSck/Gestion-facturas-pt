@@ -156,17 +156,18 @@ public class InvoiceService
         return cantidad_venciadas;
     }
 
-    public async Task<Dictionary<string, List<Invoice>>> GetFacturasAgrupadasPorRango()
+    public async Task<Dictionary<string, int>> GetFacturasAgrupadasPorRango()
     {
         var facturas = await _context.Invoices
             .Where(i => i.InvoiceStatus != "Inconsistent" && i.PaymentStatus != "Paid")
             .ToListAsync();
 
-        var agrupadas = new Dictionary<string, List<Invoice>> {
-            { "0-19 días", facturas.Where(i => i.DaysToDue >= 0 && i.DaysToDue <= 19).ToList() },
-            { "20-39 días", facturas.Where(i => i.DaysToDue >= 20 && i.DaysToDue <= 39).ToList() },
-            { "40-59 días", facturas.Where(i => i.DaysToDue >= 40 && i.DaysToDue <= 59).ToList() },
-            { "60+ días",   facturas.Where(i => i.DaysToDue >= 60).ToList() }
+        var agrupadas = new Dictionary<string, int>
+        {
+            { "0-19 days", facturas.Count(i => i.DaysToDue >= 0 && i.DaysToDue <= 19) },
+            { "20-39 days", facturas.Count(i => i.DaysToDue >= 20 && i.DaysToDue <= 39) },
+            { "40-59 days", facturas.Count(i => i.DaysToDue >= 40 && i.DaysToDue <= 59) },
+            { "60+ days",   facturas.Count(i => i.DaysToDue >= 60) }
         };
 
         return agrupadas;
