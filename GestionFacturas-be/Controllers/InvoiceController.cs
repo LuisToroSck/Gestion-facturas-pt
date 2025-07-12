@@ -144,4 +144,16 @@ public class InvoiceController : ControllerBase
         return Ok(facturas);
     }
 
+    [HttpGet("search")]
+    public async Task<ActionResult<List<InvoiceBusquedaDto>>> BuscarFacturas(
+    [FromQuery] string? numero,
+    [FromQuery] string? estado,
+    [FromQuery] string? pago)
+    {
+
+        Console.WriteLine(numero + estado + pago);
+        var resultado = await _invoiceService.BuscarFacturas(numero, estado, pago);
+        return Ok(resultado);
+    }
+
 }
