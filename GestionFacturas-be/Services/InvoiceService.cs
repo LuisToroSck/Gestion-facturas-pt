@@ -249,4 +249,29 @@ public class InvoiceService
 
         return facturas;
     }
+
+    public async Task<List<EstadoPagoResumenDto>> ObtenerResumenEstadoPago()
+    {
+        var facturas = await _context.Invoices
+            .Where(f => f.InvoiceStatus != "Inconsistent")
+            .ToListAsync();
+
+        var totalFacturas = facturas.Count;
+        var resumen = facturas
+            .GroupBy(f => f.PaymentStatus)
+            .Select(g => new EstadoPagoResumenDto
+            {
+                Estado = g.Key,
+                Total = g.Count(),
+                Porcentaje = totalFacturas > 0
+                    ? Math.Round((decimal)g.Count() * 100 / totalFacturas, 2)
+                    : 0,
+                MontoAcumulado = g.Sum(f => f.TotalAmount)
+            })
+            .OrderByDescending(r => r.Total)
+            .ToList();
+
+        return resumen;
+    }
+
 }

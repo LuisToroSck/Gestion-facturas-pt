@@ -122,4 +122,15 @@ public class InvoiceController : ControllerBase
         return Ok(facturas);
     }
 
+    [HttpGet("total-summary")]
+    public async Task<ActionResult<List<EstadoPagoResumenDto>>> GetResumenEstadoPago()
+    {
+        var resumen = await _invoiceService.ObtenerResumenEstadoPago();
+
+        if (resumen == null || !resumen.Any())
+            return NotFound("No se encontraron facturas registradas.");
+
+        return Ok(resumen);
+    }
+
 }
