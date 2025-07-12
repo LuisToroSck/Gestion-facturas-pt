@@ -137,4 +137,17 @@ public class InvoiceService
         return Math.Round((double)pagadas/total*100, 2);
     }
 
+    public async Task<decimal> CalcularMontoPendiente()
+    {
+        var facturasPendientes = await _context.Invoices
+            .Where(i =>
+                i.InvoiceStatus != "Inconsistent" &&
+                (i.PaymentStatus == "Pending" || i.PaymentStatus == "Overdue"))
+            .ToListAsync();
+
+        decimal total = facturasPendientes.Sum(i => i.TotalAmount);
+        return total;
+    }
+
+
 }
