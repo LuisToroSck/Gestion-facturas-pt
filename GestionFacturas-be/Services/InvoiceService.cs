@@ -116,4 +116,25 @@ public class InvoiceService
         return estado_pago_factura;
 
     }
+
+    public async Task<List<Invoice>> GetInvoicesValidas()
+    {
+        return await _context.Invoices
+            .Where(i => i.InvoiceStatus != "Inconsistent")
+            .ToListAsync();
+    }
+
+    public async Task<double> GetPorcentajePagadas()
+    {
+        var total = await _context.Invoices.CountAsync(i => i.InvoiceStatus != "Inconsistent");
+
+        if (total == 0)
+        {
+            return 0;
+        }
+
+        var pagadas = await _context.Invoices.CountAsync(i => i.PaymentStatus == "Paid" && i.InvoiceStatus != "Inconsistent");
+        return Math.Round((double)pagadas/total*100, 2);
+    }
+
 }
