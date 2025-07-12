@@ -173,4 +173,18 @@ public class InvoiceService
         return agrupadas;
     }
 
+    public async Task<List<Invoice>> ObtenerFacturasVencidasSinNotaAsync()
+    {
+        var facturas = await _context.Invoices
+            .Where(i =>
+                i.InvoiceStatus != "Inconsistent" &&
+                i.PaymentStatus == "Overdue" &&
+                (i.InvoiceCreditNote == null || !i.InvoiceCreditNote.Any())
+            )
+            .ToListAsync();
+
+        return facturas;
+    }
+
+
 }
