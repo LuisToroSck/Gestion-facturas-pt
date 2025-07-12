@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import Container from "react-bootstrap/esm/Container";
 import { Row, Col } from "react-bootstrap";
 import InvoicesTable from '../components/invoicesTable';
+import InvoiceSearch from '../components/invoiceSearch';
 
 function Invoices() {
 
@@ -35,6 +36,7 @@ function Invoices() {
 				<Row className="mt-5">
 					<Col>
 						<h1>Invoices</h1>
+						<InvoiceSearch />
 						<InvoicesTable
 							invoices={invoices}
 							onSuccess={getInvoices}
