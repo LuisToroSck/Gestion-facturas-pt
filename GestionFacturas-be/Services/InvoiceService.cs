@@ -275,4 +275,27 @@ public class InvoiceService
         return resumen;
     }
 
+    public async Task<List<FacturaInconsistenteDto>> ObtenerFacturasInconsistentes()
+    {
+        var inconsitent_invoices= await _context.Invoices
+            .Where(i => i.InvoiceStatus == "Inconsistent")
+            .Include(i => i.InvoiceDetail)
+            .Include(i => i.Customer)
+            .ToListAsync();
+
+        var inconsistentes = inconsitent_invoices
+            .Where(i => i.InvoiceDetail.Sum(d => (float)d.UnitPrice * (float)d.Quantity) != (float)i.TotalAmount)
+            .Select(i => new FacturaInconsistenteDto
+            {
+                InvoiceNumber = i.InvoiceNumber,
+                InvoiceDate = i.InvoiceDate,
+                CustomerName = i.Customer.CustomerName,
+                TotalAmount = i.TotalAmount,
+                SumSubtotals = i.InvoiceDetail.Sum(d => d.UnitPrice * d.Quantity),
+                InvoiceStatus = i.InvoiceStatus
+            }).ToList();
+
+        return inconsistentes;
+    }
+
 }
