@@ -3,6 +3,7 @@ import Dashboard from './pages/dashboard';
 import NavbarComponent from './components/navbar';
 import Invoices from './pages/invoices';
 import ConsistentInvoices from './pages/consistentInvoices';
+import InconsistentInvoices from './pages/inconsistentInvoices';
 import TotalSummary from './pages/totalSummary';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -17,6 +18,7 @@ function App() {
           <Route path="/invoices" element={<Invoices />} />
           <Route path="/consistent-invoices" element={<ConsistentInvoices />} />
           <Route path="/total-summary" element={<TotalSummary />} />
+          <Route path="/inconsistent-invoices" element={<InconsistentInvoices />} />
         </Routes>
     </BrowserRouter>
   );
