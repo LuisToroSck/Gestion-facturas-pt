@@ -1,8 +1,16 @@
-function formatDate(date){
-    return date != null ?  date.split('T')[0].split('-').reverse().join('/') : '';
+function formatDate(date) {
+    if (!date) return '';
+
+    const parsed = typeof date === 'string' ? new Date(date) : date;
+
+    const day = String(parsed.getDate()).padStart(2, '0');
+    const month = String(parsed.getMonth() + 1).padStart(2, '0');
+    const year = parsed.getFullYear();
+
+    return `${day}/${month}/${year}`;
 }
 
-function formatAmount(amount){
+function formatAmount(amount) {
     return amount != null ? new Intl.NumberFormat('es-CL', {
         style: 'currency',
         currency: 'CLP',
