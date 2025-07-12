@@ -76,6 +76,24 @@ using (var scope = app.Services.CreateScope())
 {
     var invoiceService = scope.ServiceProvider.GetRequiredService<InvoiceService>();
     invoiceService.LoadInvoicesFromJson("bd_exam.json");
+
+    var context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+
+    context.SaveChanges();
+
+    context = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    context.Database.ExecuteSqlRaw(@"
+        DROP VIEW IF EXISTS vw_factura_busqueda;
+
+        CREATE VIEW vw_factura_busqueda AS
+        SELECT 
+          i.InvoiceNumber,
+          i.InvoiceDate,
+          i.InvoicePayment_PaymentDate,
+          i.InvoicePayment_PaymentMethod
+        FROM Invoices i;
+    ");
+
 }
 
 app.Run();
