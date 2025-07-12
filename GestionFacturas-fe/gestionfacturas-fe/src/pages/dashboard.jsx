@@ -12,17 +12,16 @@ function Dashboard() {
     const [loading, setLoading] = useState(true);
 
     const [paidPercentage, setPaidPercentage] = useState(0.0);
-
     const [montoPendiente, setMontoPendiente] = useState(0.0);
-
     const [cantidadVencidas, setCantidadVencidas] = useState(0);
-
     const [cantidadVencidasPorDias, setCantidadVencidasPorDias] = useState({});
+    const [overdueInvoicesSinNC, setOverdueInvoicesSinNC] = useState([]);
 
     function getInvoices() {
         api.get('/invoices')
             .then((response) => {
                 setInvoices(response.data);
+                console.log('Facturas cargadas:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar las facturas:', error);
@@ -67,10 +66,20 @@ function Dashboard() {
         api.get('/invoices/by-due-range')
             .then((response) => {
                 setCantidadVencidasPorDias(response.data);
-                console.log('Cantidad de facturas vencidas por días:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar la cantidad de facturas vencidas por días:', error);
+            });
+    }
+
+    function getOverdueInvoicesSinNC() {
+        api.get('/invoices/overdue-no-credit')
+            .then((response) => {
+                setOverdueInvoicesSinNC(response.data);
+                console.log('Facturas vencidas sin nota de crédito:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error al cargar las facturas vencidas sin nota de crédito:', error);
             });
     }
 
@@ -80,6 +89,7 @@ function Dashboard() {
         getMontoPendiente();
         getCantidadVencidas();
         getCantidadVencidasPorDias();
+        getOverdueInvoicesSinNC();
     }, []);
 
     if (loading) return <p>Cargando facturas...</p>;
@@ -91,7 +101,7 @@ function Dashboard() {
                 <Row className="mt-5">
                     <Col>
                         <h1>Dashboard</h1>
-                        <p>Resumen del estado de las facturas y sus pagos.</p>
+                        <p>Resumen del estado de las facturas y sus estados de pago</p>
                     </Col>
                 </Row>
 
@@ -138,7 +148,7 @@ function Dashboard() {
                 <Row>
                     <Col>
                         <h4>Overdue invoices without credit note</h4>
-                        <OverdueInvoicesTable invoices={invoices.filter(invoice => invoice.invoice_credit_note.length === 0)} />
+                        <OverdueInvoicesTable invoices={overdueInvoicesSinNC} />
                     </Col>
                 </Row>
 
