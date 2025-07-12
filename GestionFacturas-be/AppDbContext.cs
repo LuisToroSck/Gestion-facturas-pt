@@ -1,3 +1,4 @@
+using GestionFacturas_be.Models;
 using Microsoft.EntityFrameworkCore;
 
 public class AppDbContext : DbContext
@@ -5,6 +6,8 @@ public class AppDbContext : DbContext
     public AppDbContext(DbContextOptions<AppDbContext> options) : base(options) { }
 
     public DbSet<Invoice> Invoices { get; set; }
+
+    public DbSet<InvoiceBusquedaDto> vw_factura_busqueda { get; set; }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
@@ -31,5 +34,9 @@ public class AppDbContext : DbContext
 
         modelBuilder.Entity<Invoice>()
             .OwnsOne(i => i.Customer);
+
+        modelBuilder.Entity<InvoiceBusquedaDto>()
+            .HasNoKey()
+            .ToView("vw_factura_busqueda");
     }
 }
