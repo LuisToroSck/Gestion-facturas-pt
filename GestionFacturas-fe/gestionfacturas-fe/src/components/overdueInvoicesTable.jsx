@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import Table from 'react-bootstrap/Table';
-import Pagination from 'react-bootstrap/Pagination';
+import { Table, Badge, Pagination } from 'react-bootstrap';
 import { formatDate, formatAmount } from '../utils/utils';
+import InvoiceDetail from './invoiceDetail';
 
 function OverdueInvoices({ invoices }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +26,9 @@ function OverdueInvoices({ invoices }) {
         );
     }
 
+    const [selectedInvoice, setSelectedInvoice] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <>
             <Table responsive hover>
@@ -33,9 +36,11 @@ function OverdueInvoices({ invoices }) {
                     <tr>
                         <th>Number</th>
                         <th>Client</th>
-                        <th>Due Date</th>
-                        <th>Payment Status</th>
                         <th>Amount</th>
+                        <th>Due Date</th>
+                        <th>Date</th>
+                        <th>Payment Status</th>
+                        <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -43,15 +48,29 @@ function OverdueInvoices({ invoices }) {
                         <tr key={invoice.invoiceNumber}>
                             <td>{invoice.invoiceNumber}</td>
                             <td>{invoice.customer.customer_name}</td>
-                            <td>{formatDate(invoice.payment_due_date)}</td>
-                            <td>{invoice.payment_status}</td>
                             <td>{formatAmount(invoice.total_amount)}</td>
+                            <td>{formatDate(invoice.payment_due_date)}</td>
+                            <td>{formatDate(invoice.invoice_date)}</td>
+                            <td><Badge bg={invoice.payment_status === 'Paid' ? 'success' : invoice.payment_status === 'Pending' ? 'warning' : 'danger'}>{invoice.payment_status}</Badge></td>
+                            <td>
+                                <button className="btn btn-primary btn-sm" onClick={() => {
+                                    setSelectedInvoice(invoice);
+                                    setShowModal(true);
+                                }}>View</button>
+                                <button className="btn btn-success btn-sm ms-2">+ Credit note</button>
+                            </td>
                         </tr>
                     ))}
                 </tbody>
             </Table>
 
             <Pagination>{paginationItems}</Pagination>
+
+            <InvoiceDetail
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                invoice={selectedInvoice}
+            />
         </>
     );
 }

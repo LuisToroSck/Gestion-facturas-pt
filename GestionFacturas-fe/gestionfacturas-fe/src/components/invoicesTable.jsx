@@ -2,6 +2,7 @@ import Table from 'react-bootstrap/Table';
 import { formatDate, formatAmount } from '../utils/utils';
 import { Pagination, Badge } from 'react-bootstrap';
 import { useState } from 'react';
+import InvoiceDetail from './invoiceDetail';
 
 function InvoicesTable({ invoices }) {
     const [currentPage, setCurrentPage] = useState(1);
@@ -26,6 +27,9 @@ function InvoicesTable({ invoices }) {
         );
     }
 
+    const [selectedInvoice, setSelectedInvoice] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+
     return (
         <>
 
@@ -37,7 +41,7 @@ function InvoicesTable({ invoices }) {
                         <th>Customer Name</th>
                         <th>Total Amount</th>
                         <th>Payment Status</th>
-                        <th>Status</th> 
+                        <th>Status</th>
                         <th>Payment Due Date</th>
                         <th>Actions</th>
                     </tr>
@@ -53,8 +57,11 @@ function InvoicesTable({ invoices }) {
                             <td>{invoice.invoice_status}</td>
                             <td>{formatDate(invoice.payment_due_date)}</td>
                             <td>
-                                <button className="btn btn-primary btn-sm">View</button>
-                                <button className="btn btn-secondary btn-sm ms-2">Edit</button>
+                                <button className="btn btn-primary btn-sm" onClick={() => {
+                                    setSelectedInvoice(invoice);
+                                    setShowModal(true);
+                                }}>View</button>
+                                <button className="btn btn-success btn-sm ms-2">+ Credit note</button>
                             </td>
                         </tr>
                     ))}
@@ -62,6 +69,12 @@ function InvoicesTable({ invoices }) {
             </Table>
 
             <Pagination>{paginationItems}</Pagination>
+
+            <InvoiceDetail
+                show={showModal}
+                onHide={() => setShowModal(false)}
+                invoice={selectedInvoice}
+            />
         </>
     );
 }
