@@ -298,4 +298,23 @@ public class InvoiceService
         return inconsistentes;
     }
 
+    public async Task<List<InvoiceBusquedaDto>> BuscarFacturas(string? numero, string? estado, string? pago)
+    {
+        var query = _context.vw_factura_busqueda.AsQueryable();
+
+        var facturas = await _context.vw_factura_busqueda.ToListAsync();
+        Console.WriteLine("Facturas en vista: " + facturas.Count);
+        /*
+        if (int.TryParse(numero, out var numParsed))
+            query = query.Where(f => f.InvoiceNumber == numParsed);
+
+        if (!string.IsNullOrEmpty(estado))
+            query = query.Where(f => f.InvoiceStatus == estado);
+
+        if (!string.IsNullOrEmpty(pago))
+            query = query.Where(f => f.PaymentStatus == pago);
+        */
+        return await query.ToListAsync();
+    }
+
 }
