@@ -149,5 +149,10 @@ public class InvoiceService
         return total;
     }
 
+    public async Task<decimal> CantidadVencidas()
+    {
+        var cantidad_venciadas = await _context.Invoices.CountAsync(i => i.PaymentStatus == "Overdue" && i.InvoiceStatus != "Inconsistent");
 
+        return cantidad_venciadas;
+    }
 }
