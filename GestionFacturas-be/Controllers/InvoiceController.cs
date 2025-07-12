@@ -92,7 +92,7 @@ public class InvoiceController : ControllerBase
     [HttpGet("overdue-no-credit")]
     public async Task<ActionResult<List<Invoice>>> GetVencidasSinNota()
     {
-        var facturas = await _invoiceService.ObtenerFacturasVencidasSinNotaAsync();
+        var facturas = await _invoiceService.ObtenerFacturasVencidasSinNota();
 
         if (facturas == null || !facturas.Any())
             return NotFound("No hay facturas vencidas sin nota de crédito.");
@@ -103,12 +103,23 @@ public class InvoiceController : ControllerBase
     [HttpPost("add-credit-note")]
     public async Task<ActionResult<InvoiceCreditNote>> AddCreditNote([FromBody] CreateCreditNoteDto dto)
     {
-        var nota = await _invoiceService.AgregarNotaDeCreditoAsync(dto);
+        var nota = await _invoiceService.AgregarNotaDeCredito(dto);
 
         if (nota == null)
             return BadRequest("No se pudo agregar la nota. Verificá que el número de factura exista.");
 
         return Ok(nota);
+    }
+
+    [HttpGet("consistent-invoices")]
+    public async Task<ActionResult<List<Invoice>>> GetFacturasConsistentesVencidas()
+    {
+        var facturas = await _invoiceService.ObtenerFacturasCriticas();
+
+        if (facturas == null || !facturas.Any())
+            return NotFound("No se encontraron facturas que cumplan los criterios.");
+
+        return Ok(facturas);
     }
 
 }
