@@ -10,11 +10,12 @@ function Dashboard() {
     const [invoices, setInvoices] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    useEffect(() => {
+    const [paidPercentage, setPaidPercentage] = useState(0.0);
+
+    function getInvoices() {
         api.get('/invoices')
             .then((response) => {
                 setInvoices(response.data);
-                console.log('Facturas cargadas:', response.data);
             })
             .catch((error) => {
                 console.error('Error al cargar las facturas:', error);
@@ -22,6 +23,22 @@ function Dashboard() {
             .finally(() => {
                 setLoading(false);
             });
+    }
+
+    function getPorcentajePaid() {
+        api.get('/invoices/paid-percentage')
+            .then((response) => {
+                setPaidPercentage(response.data);
+                console.log('Porcentaje de facturas pagadas:', response.data);
+            })
+            .catch((error) => {
+                console.error('Error al cargar el porcentaje de facturas pagadas:', error);
+            });
+    }
+
+    useEffect(() => {
+        getInvoices();
+        getPorcentajePaid();
     }, []);
 
     if (loading) return <p>Cargando facturas...</p>;
@@ -48,7 +65,7 @@ function Dashboard() {
                         <CardResume title="Total Invoices" value={invoices.length} />
                     </Col>
                     <Col>
-                        <CardResume title="Payment Status" value="85% Paid" />
+                        <CardResume title="Payment Status" value={`${paidPercentage}% Paid`} />
                     </Col>
                     <Col>
                         <CardResume title="Monto pendiente" value="$215.000" />
