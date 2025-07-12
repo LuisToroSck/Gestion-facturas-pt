@@ -39,14 +39,14 @@ public class InvoiceService
             foreach (var invoice in invoiceContainer.invoices)
             {
 
+                // Calcular estado de la factura
+                invoice.InvoiceStatus = CalcularEstadoFactura(invoice);
+
                 // Incoherencia entre subtotales de productos y "total_amount"
                 if (MontoTotal(invoice) != invoice.TotalAmount)
                 {
                     invoice.InvoiceStatus = "Inconsistent";
                 }
-
-                // Calcular estado de la factura
-                invoice.InvoiceStatus = CalcularEstadoFactura(invoice);
 
                 // Calcular estado de pago de la factura
                 invoice.PaymentStatus = CalcularEstadoPagoFactura(invoice);
