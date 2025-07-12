@@ -241,9 +241,10 @@ public class InvoiceService
             .Include(i => i.Customer)
             .Include(i => i.InvoiceDetail)
             .Where(i =>
+                i.InvoiceStatus != "Inconsistent" &&
                 i.PaymentDueDate < hoy.AddDays(-30) &&
                 (i.InvoiceCreditNote == null || i.InvoiceCreditNote.Count == 0) &&
-                i.InvoicePayment == null
+                (i.InvoicePayment == null || i.InvoicePayment.PaymentDate == null)
             )
             .ToListAsync();
 
