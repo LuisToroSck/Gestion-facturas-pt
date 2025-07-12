@@ -5,17 +5,14 @@ import { formatDate, formatAmount } from '../utils/utils';
 
 function OverdueInvoices({ invoices }) {
     const [currentPage, setCurrentPage] = useState(1);
-    const itemsPerPage = 6;
+    const itemsPerPage = 10;
 
-    // Calcular índices
     const indexOfLastItem = currentPage * itemsPerPage;
     const indexOfFirstItem = indexOfLastItem - itemsPerPage;
     const currentInvoices = invoices.slice(indexOfFirstItem, indexOfLastItem);
 
-    // Total páginas
     const totalPages = Math.ceil(invoices.length / itemsPerPage);
 
-    // Crear ítems de paginación
     const paginationItems = [];
     for (let number = 1; number <= totalPages; number++) {
         paginationItems.push(
